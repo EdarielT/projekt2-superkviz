@@ -5,19 +5,19 @@ let otazky = [
         question: 'To je prvni otazka',
         image: 'obrazky/moncicak.jpg',
         answers: ['Prvni odpoved 1', 'Druha 1', 'Treti 1'],
-        rightAnswer: 1
+        rightAnswer: 0
     },
     {
         question: 'To je druha otazka',
         image: 'obrazky/ovoce.jpg',
         answers: ['Prvni odpoved 2', 'Druha 2', 'Treti 2'],
-        rightAnswer: 3
+        rightAnswer: 2
     },
     {
         question: 'To je treti otazka',
         image: 'obrazky/pivo.jpg',
         answers: ['Prvni odpoved 3', 'Druha 3', 'Treti 3'],
-        rightAnswer: 2
+        rightAnswer: 1
     }
 ];
 
@@ -89,7 +89,51 @@ let chosenAnswer = index => {
         kviz.removeChild(child);
         child = kviz.firstElementChild;
     }
+    if (otazky.length !== userAnswers.length) {
+        //volame dalsi set otazek a odpovedi
+        addingContent(userAnswers.length);
+    } else {
+        console.log('vysledky');
+        results();
+    }
+}
 
-    //volame dalsi set otazek a odpovedi
-    addingContent(userAnswers.length);
+//vysledky
+
+let results = () => {
+    let kviz = document.querySelector('.kviz');
+    kviz.className = 'vysledek';
+
+    let hodnoceniNapis = document.createElement('h2');
+    kviz.appendChild(hodnoceniNapis);
+    hodnoceniNapis.innerHTML = 'Tvoje hodnocení';
+
+    let howManyRightAnswers = 0;
+
+    for (let i = 0; i < otazky.length; i++) {
+        //napiseme otazku
+        let otazka = document.createElement('h3');
+        kviz.appendChild(otazka);
+        otazka.innerHTML = `${i+1}. ${otazky[i].question}`;
+
+        //odpoved kterou vybral hrac
+        let usersAnswer = document.createElement('p');
+        kviz.appendChild(usersAnswer);
+        usersAnswer.innerHTML = `Tvoje odpověď: ${otazky[i].answers[userAnswers[i]]}`;
+
+        //byla to spravna odpoved?
+        let ourRightAnswer = document.createElement('p');
+        kviz.appendChild(ourRightAnswer);
+        if (userAnswers[i] === otazky[i].rightAnswer) {
+            ourRightAnswer.innerHTML = 'To je SPRÁVNĚ';
+            howManyRightAnswers++;
+        } else {
+            ourRightAnswer.innerHTML = `Správná odpověď: ${otazky[i].answers[otazky[i].rightAnswer]}`;
+        }
+    }
+
+    let finalResult = document.createElement('h2');
+    kviz.appendChild(finalResult);
+    finalResult.innerHTML = `Správně ${howManyRightAnswers} ze ${otazky.length} otázek. Úspěšnost ${Math.floor(howManyRightAnswers/otazky.length*100)}%.`;
+      
 }
