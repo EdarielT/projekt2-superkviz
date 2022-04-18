@@ -55,10 +55,12 @@ h1 {
 
 #otazka {
 	margin: 20px 0 30px 0;
+	font-family: 'Bangers', bold;
 	font-size: 36px;
 	line-height: 1.2;
 	text-align: center;
 	color: black;
+
 }
 
 .obsah {
