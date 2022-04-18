@@ -19,7 +19,7 @@ let otazky = [
         answers: ['Prvni odpoved 3', 'Druha 3', 'Treti 3'],
         rightAnswer: 2
     }
-]
+];
 
 //funkce pro zobrazeni obsahu stranky
 
@@ -66,6 +66,7 @@ let addingContent = i => {
         odpoved.dataset.odpoved = index;
         odpovedi.appendChild(odpoved);
         odpoved.innerHTML = otazky[i].answers[index];
+        odpoved.addEventListener('click', () => chosenAnswer(index));
     }
     moznosti.appendChild(odpovedi);
     odpovedAObrazek.appendChild(moznosti);
@@ -74,4 +75,21 @@ let addingContent = i => {
 //prvni set se zobrazi pri nacteni stranky
 window.addEventListener('load', () => {
     addingContent(0);
-})
+});
+
+let userAnswers = [];
+
+let chosenAnswer = index => {
+    userAnswers.push(index);
+
+    //odstranujeme vsechno
+    let kviz = document.querySelector('.kviz');
+    let child = kviz.firstElementChild;
+    while (child) {
+        kviz.removeChild(child);
+        child = kviz.firstElementChild;
+    }
+
+    //volame dalsi set otazek a odpovedi
+    addingContent(userAnswers.length);
+}
