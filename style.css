@@ -109,9 +109,9 @@ h1 {
 }
 
 
-.vysledek {
+/**.vysledek {
 	display: none;
-}
+}**/
 
 .vysledek h2 {
 	margin-top: 0;

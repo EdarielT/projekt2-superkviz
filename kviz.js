@@ -2,21 +2,21 @@
 
 let otazky = [
     {
-        question: 'To je prvni otazka',
-        image: 'obrazky/moncicak.jpg',
-        answers: ['Prvni odpoved 1', 'Druha 1', 'Treti 1'],
-        rightAnswer: 0
-    },
-    {
-        question: 'To je druha otazka',
-        image: 'obrazky/ovoce.jpg',
-        answers: ['Prvni odpoved 2', 'Druha 2', 'Treti 2'],
+        question: 'Kolik srdcí má chobotnice?',
+        image: 'obrazky/chobotnice.jpeg',
+        answers: ['Jedno', 'Dvě', 'Tři'],
         rightAnswer: 2
     },
     {
-        question: 'To je treti otazka',
-        image: 'obrazky/pivo.jpg',
-        answers: ['Prvni odpoved 3', 'Druha 3', 'Treti 3'],
+        question: 'Jaký je chemický symbol pro stříbro?',
+        image: 'obrazky/chemistry.webp',
+        answers: ['Ag', 'Sr', 'Au'],
+        rightAnswer: 0
+    },
+    {
+        question: 'Jaká národnost byl sochař Alberto Giacometti?',
+        image: 'obrazky/Alberto.avif',
+        answers: ['Ital', 'Švýcar', 'Španěl'],
         rightAnswer: 1
     }
 ];
@@ -93,7 +93,6 @@ let chosenAnswer = index => {
         //volame dalsi set otazek a odpovedi
         addingContent(userAnswers.length);
     } else {
-        console.log('vysledky');
         results();
     }
 }
@@ -135,5 +134,5 @@ let results = () => {
     let finalResult = document.createElement('h2');
     kviz.appendChild(finalResult);
     finalResult.innerHTML = `Správně ${howManyRightAnswers} ze ${otazky.length} otázek. Úspěšnost ${Math.floor(howManyRightAnswers/otazky.length*100)}%.`;
-      
+
 }
